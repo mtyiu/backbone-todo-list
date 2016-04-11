@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>To-do list in Backbone.js</title>
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<h2>To-do list</h2>
+			<h4><small><strong>Dependencies:</strong> jQuery, Bootstrap, Underscore.js, Backbone.js</small></h4>
+			<hr />
+
+			<div class="row" id="list">
+				<div class="col-sm-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Add New Item</div>
+						<div class="panel-body">
+							<form id="edit-form" class="form-horizontal">
+								<div class="form-group">
+									<label for="title" class="col-sm-3 control-label">Title</label>
+									<div class="col-sm-9"><input type="text" class="form-control" id="title" /></div>
+								</div>
+
+								<div class="form-group">
+									<label for="content" class="col-sm-3 control-label">Content</label>
+									<div class="col-sm-9"><input type="text" class="form-control" id="content" /></div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-4"><input type="submit" value="Submit" class="btn btn-primary btn-block" /></div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6">
+					<div class="panel panel-info">
+						<div class="panel-heading">To-do list</div>
+						<div class="panel-body">
+							<ul class="list-group"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Dependencies -->
+		<script src="/lib/jquery.min.js"></script>
+		<script src="/lib/bootstrap.min.js"></script>
+		<script src="/lib/underscore.min.js"></script>
+		<script src="/lib/backbone.min.js"></script>
+
+		<!-- Templates -->
+		<script id="item-tpl" type="text/template">
+			<h4>
+				<%= title %>
+				<small><a href="#" class="delete">[ Delete ]</a></small>
+			</h4>
+			<p><%= content %></p>
+			<p>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox"> Completed
+					</label>
+				</div>
+			</p>
+		</script>
+
+		<!-- Models -->
+		<script src="js/models/item.js"></script>
+		<script src="js/collections/list.js"></script>
+		<!-- Views -->
+		<script src="js/views/item.js"></script>
+		<script src="js/views/list.js"></script>
+		<!-- Controller -->
+		<script src="js/app.js"></script>
+	</body>
+</html>
