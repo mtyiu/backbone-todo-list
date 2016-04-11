@@ -7,9 +7,14 @@ app.ListView = Backbone.View.extend( {
 		'submit form' : 'submit'
 	},
 
-	initialize: function( list ) {
-		this.collection = new app.List( list );
+	initialize: function() {
+		app.isLoading( true );
+		this.collection = new app.List();
+		this.collection.fetch( { reset : true, success : function() { app.isLoading( false ); } } );
 		this.render();
+
+		this.listenTo( this.collection, 'add', this.renderItem );
+		this.listenTo( this.collection, 'reset', this.render );
 	},
 
 	// Render the list by rendering each item in its collection
@@ -32,11 +37,18 @@ app.ListView = Backbone.View.extend( {
 
 		var formData = {};
 
+		this.$el.find( 'form input' ).attr( 'disabled', 'disabled' );
 		this.$el.find( 'form input[type="text"]' ).each( function( i, el ) {
 			formData[ el.id ] = $( el ).val();
-			$( el ).val( '' );
 		} );
 
-		this.collection.add( new app.Item( formData ) );
+		app.isLoading( true );
+		this.collection.create( formData, {
+			success : ( function() {
+				app.isLoading( false );
+				this.$el.find( 'form input' ).removeAttr( 'disabled' );
+				this.$el.find( 'form input[type="text"]' ).val( '' );
+			} ).bind( this )
+		} );
 	}
 } );

@@ -6,11 +6,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>To-do list in Backbone.js</title>
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			#loading {
+				display: none;
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				font-weight: bold;
+				font-size: 24px;
+				font-style: italic;
+				color: #990000;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
 			<h2>To-do list</h2>
 			<h4><small><strong>Dependencies:</strong> jQuery, Bootstrap, Underscore.js, Backbone.js</small></h4>
+			<div id="loading">Loading...</div>
 			<hr />
 
 			<div class="row" id="list">
@@ -65,7 +78,7 @@
 			<p>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox"> Completed
+						<input type="checkbox" class="completed" <%= completed ? 'checked="checked"' : '' %>> Completed
 					</label>
 				</div>
 			</p>

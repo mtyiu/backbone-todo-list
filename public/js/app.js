@@ -1,10 +1,24 @@
 var app = app || {};
 
-$( function() {
-	var list = 	[
-		{ title : 'Item #1', content : 'Content #1', completed : true },
-		{ title : 'Item #2', content : 'Content #2', completed : false },
-	];
+app.isLoading = ( function() {
+	var interval = null;
+	var $loading = $( '#loading' );
+	return function( isLoading ) {
+		if ( isLoading ) {
+			if ( ! interval ) {
+				$loading.show();
+				interval = setInterval(function () {
+					$loading.toggle();
+				}, 500 );
+			}
+		} else {
+			$loading.hide();
+			clearInterval( interval );
+			interval = null;
+		}
+	};
+} )();
 
-	new app.ListView( list );
+$( function() {
+	new app.ListView();
 } );

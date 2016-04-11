@@ -6,7 +6,8 @@ app.ItemView = Backbone.View.extend( {
 	template : _.template( $( '#item-tpl' ).html() ),
 
 	events : {
-		'click .delete' : 'deleteItem'
+		'click .delete' : 'deleteItem',
+		'click .completed' : 'setCompleted'
 	},
 
 	render : function() {
@@ -22,5 +23,14 @@ app.ItemView = Backbone.View.extend( {
 
 		// Delete view
 		this.remove();
+	},
+
+	setCompleted : function( e ) {
+		app.isLoading( true );
+		this.model.save( { completed : this.$el.find( '.completed' ).prop( 'checked' ) }, {
+			success : function() {
+				app.isLoading( false );
+			}
+		} );
 	}
 } );
