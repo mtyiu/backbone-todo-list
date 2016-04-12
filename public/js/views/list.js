@@ -10,6 +10,9 @@ app.ListView = Backbone.View.extend( {
 	initialize: function( list ) {
 		this.collection = new app.List( list );
 		this.render();
+
+		this.listenTo( this.collection, 'add', this.renderItem );
+		this.listenTo( this.collection, 'reset', this.render );
 	},
 
 	// Render the list by rendering each item in its collection
